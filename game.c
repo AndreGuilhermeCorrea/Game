@@ -2,23 +2,47 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define MAX_LINHA 10
-#define MAX_COLUNA 10
+// tamanho da caverna(aumentada)
+#define MAX_LINHA 20
+#define MAX_COLUNA 30
+
+/*Este é um jogo de console simples, onde você controla um personagem (P)
+em uma caverna representada por uma grade.
+Seu objetivo é chegar até a saída (@) evitando um monstro (M)
+que se move aleatoriamente pela caverna.*/
 
 int main()
 {
+
+  // Inicialização das variáveis
   srand(time(NULL));
+
+  // ox, oy: Posição da saída
   int ox = MAX_COLUNA / 2, oy = MAX_LINHA - 2;
+
+  // px, py: Posição inicial do jogador.
   int px = 1, py = 1;
+
+  // mx, my: Posição inicial do monstro.
   int mx = (int)(MAX_COLUNA * 0.7), my = (int)(MAX_LINHA * 0.7);
+
+  // x, y: Variáveis de iteração para percorrer a grade.
   int x, y;
+
+  // comando: Armazena o comando digitado pelo jogador.
   char comando;
+
+  // movimentoRealizado: Controla se o movimento do jogador foi realizado com
   int movimentoRealizado;
+
+  // dificuldade: Nível de dificuldade inicial do jogo.
   int dificuldade = 1;
 
+  // Loop Principal:
   for (;;)
   {
 
+    // O loop será interrompido quando o jogador atingir a saída ou colidir com o monstro.
     system("CLS");
 
     printf("Caverna X - dificuldade: %d\n\n", dificuldade);
@@ -41,10 +65,11 @@ int main()
     }
     printf("\n");
 
+    // Entrada do Jogador:
     printf("Comando: C (cima)\tD (direita)\tB (baixo)\tE (esquerda)\n");
     printf("Sua vez!. Digite um comando: ");
     scanf(" %c", &comando);
-
+    // Movimento do Jogador:
     movimentoRealizado = 1;
     switch (comando)
     {
@@ -91,6 +116,7 @@ int main()
       system("PAUSE");
     }
 
+    // Movimento Aleatório do Monstro:
     if (movimentoRealizado == 1)
     {
       int direcao = rand() % 4;
@@ -130,6 +156,9 @@ int main()
       }
     }
 
+    // Verificação de Condições de Jogo:
+    // Verifica se o jogador colidiu com o monstro (GAME OVER) ou se atingiu a saída (YOU WIN).
+    // Se o jogador vencer, a dificuldade aumenta, e as posições são resetadas.
     if (px == mx && py == my)
     {
       printf("\n\nGAME OVER\n");
@@ -148,7 +177,7 @@ int main()
       my = (int)(MAX_LINHA * 0.7);
     }
   }
-
+  // Finalização do Programa:
   system("PAUSE");
   return 0;
 }
