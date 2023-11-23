@@ -45,7 +45,10 @@ int main()
     // O loop será interrompido quando o jogador atingir a saída ou colidir com o monstro.
     system("CLS");
 
+    //imprime a caverna
     printf("Caverna X - dificuldade: %d\n\n", dificuldade);
+
+    //imprime a caverna
     for (y = 0; y < MAX_LINHA; y++)
     {
       for (x = 0; x < MAX_COLUNA; x++)
