@@ -131,6 +131,10 @@ int main()
 
     if (movimentoRealizado == 1)
     {
+
+      // Fator de escala para diminuir a velocidade dos monstros
+      float fatorEscala = 0.5;
+
       // Movimenta os monstros aleatoriamente
       // Atualiza a posição dos monstros para perseguir o jogador
       for (int i = 0; i < NUM_MONSTROS; i++)
@@ -138,15 +142,9 @@ int main()
         int deltaX = px - monstros[i][0];
         int deltaY = py - monstros[i][1];
 
-        // Move o monstro na direção do jogador
-        if (abs(deltaX) > abs(deltaY))
-        {
-          monstros[i][0] += (deltaX > 0) ? dificuldade : -dificuldade;
-        }
-        else
-        {
-          monstros[i][1] += (deltaY > 0) ? dificuldade : -dificuldade;
-        }
+        // Move o monstro na direção do jogador com velocidade reduzida
+        monstros[i][0] += (int)(fatorEscala * deltaX);
+        monstros[i][1] += (int)(fatorEscala * deltaY);
 
         // Verifica limites da caverna
         if (monstros[i][0] < 1)
@@ -165,6 +163,17 @@ int main()
         else if (monstros[i][1] >= MAX_LINHA - 1)
         {
           monstros[i][1] = MAX_LINHA - 2;
+        }
+
+        // Verifica se dois monstros estão na mesma posição e ajusta
+        for (int j = 0; j < NUM_MONSTROS; j++)
+        {
+          if (i != j && monstros[i][0] == monstros[j][0] && monstros[i][1] == monstros[j][1])
+          {
+            // Se encontrou duas posições iguais, ajusta a posição do monstro i
+            monstros[i][0] = rand() % MAX_COLUNA;
+            monstros[i][1] = rand() % MAX_LINHA;
+          }
         }
       }
     }
