@@ -109,14 +109,16 @@ int main()
     printf("\nDificuldade: %d\n", dificuldade);
 
     // Recebe o comando do jogador
-    printf("Comando: C (cima)\tD (direita)\tB (baixo)\tE (esquerda)\tX (encerrar)\n");
+    printf("Comando: W (cima)\tD (direita)\tS (baixo)\tA (esquerda)\tX (encerrar)\n");
     printf("Sua vez! Digite um comando: ");
-    comando = _getch(); // Substitui Scanf para reconhecer a tecla assim que digitada.
-    // Recebe o movimento do Jogador.
+    // Substitui Scanf para reconhecer a tecla assim que digitada.
+    comando = _getch();
+    // Substitui todos os caracteres para minúsculo.
+    comando = tolower(comando);
     movimentoRealizado = 1;
     switch (comando)
     {
-    case 'c':
+    case 'w':
       py -= 1;
       if (py < 1)
       {
@@ -125,7 +127,7 @@ int main()
       }
       break;
 
-    case 'b':
+    case 's':
       py += 1;
       if (py >= MAX_LINHA - 1)
       {
@@ -134,7 +136,7 @@ int main()
       }
       break;
 
-    case 'e':
+    case 'a':
       px -= 1;
       if (px < 1)
       {
